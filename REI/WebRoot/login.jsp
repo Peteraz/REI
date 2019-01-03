@@ -1,0 +1,152 @@
+<%@ page language="java" import="java.util.*" contentType="text/html;charaset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <base href="<%=basePath%>">
+    
+    <title>高校医疗报销系统</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta http-equiv="pragma" content="no-cache">                          <!--这几句meta作用是清除浏览器中的缓存,再次进入曾经访问过的页面时，浏览器必须从服务端下载最新的内容，达到刷新的效果。 -->
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">      <!--最后两句meta,做seo用 -->
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+    <link href="./custom/uimaker/easyui.css" rel="stylesheet" >
+ </head>
+<body>
+	<div class="login-hd">
+		<div class="left-bg"></div>
+		<div class="right-bg"></div>
+		<div class="hd-inner">
+			<span class="logo"></span>
+			<span class="split"></span>
+			<span class="sys-name">报销平台</span>
+		</div>
+	</div>
+	<div class="login-bd">
+		<div class="bd-inner">
+			<div class="inner-wrap">
+				<div class="lg-zone">
+					<div class="lg-box">
+						<div class="lg-label"><h4>用户登录</h4></div>
+						<form action="user!login.action" method="post">
+							<div class="lg-username input-item clearfix">
+								<i class="iconfont">&#xe60d;</i>
+								<input type="text" id="tx_account" placeholder="账号/邮箱" name="entity.account">
+							</div>
+							<div class="lg-password input-item clearfix">
+								<i class="iconfont">&#xe634;</i>
+								<input type="password" placeholder="请输入密码" name="entity.password">
+							</div>
+							<div class="lg-check clearfix">
+								<div class="input-item">
+									<i class="iconfont">&#xe633;</i>
+									<input type="text" placeholder="验证码" name ="checkcode" />
+								</div>
+								<span ><img src="PictureCheckCode.Servlet" id="ckcode" onclick="refresh()"></img></span>
+							</div>
+							<div class="tips clearfix">
+								<label><input type="checkbox" id="ck_rmUser" >记住用户名</label>
+								<a href="./register.jsp" class="register">立即注册</a>
+								<a href="./forget.jsp" class="forget-pwd">忘记密码？</a>
+							</div>
+							<div align="center">
+								<input type="submit" class="login" onclick="save()" value="登录" />
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="lg-use">
+		           <b><font size="20">在线报销平台!</font></b><br/><br/><br/>
+                   <b style="font-size: x-large!important;">1这是一个在线的医疗报销系统，报销分类:有门诊和住院的。</b><br/>
+       			   <b style="font-size: x-large!important;">2.新用户需要通过审核才能使用报销功能，要通审核必须先要上传证件和身份证的照片才能进行审核。</b><br/>
+            	   <b style="font-size: x-large!important;">3.照片类型:&nbsp;.bmp&nbsp;.png&nbsp;.gif&nbsp;.jpg&nbsp;.jpeg,照片不能超过2MB！</b><br/>
+				</div>
+				<div class="lg-poster"></div>			
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="login-ft">
+		<div class="ft-inner">
+			<div class="about-us">
+				<a href="javascript:;">关于我们</a>
+				<a href="javascript:;">法律声明</a>
+				<a href="javascript:;">服务条款</a>
+				<a href="javascript:;">联系方式</a>
+			</div>
+			<div class="address">地址：暨南大学建阳院14栋225室&nbsp;邮编：5106329&nbsp;&nbsp;Copyright&nbsp;©&nbsp;2013&nbsp;-&nbsp;2017&nbsp;关步青&nbsp;版权所有</div>
+			<div class="other-info">E-mail：673840304@qq.com</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="./custom/jquery.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="./custom/jquery.cookie.js" charset="utf-8"></script>
+	<script type="text/javascript" src="./custom/jquery.easyui.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="./custom/easyui-lang-zh_CN.js" charset="utf-8"></script>
+	<script type="text/javascript">
+      //登录操作错误提示
+      var msg = "${msg}";
+      if(msg!=null&&msg!=""){
+      		$(function(){
+      			$.messager.show({
+      				title:"登录错误!",
+      				msg:msg,
+      				showType:'fade',
+      				timeout:1500,
+      				//中间
+      				style:{ 
+      					right:'',
+      					bottom:''
+      				}
+      			});
+      		});   	
+      }
+      	
+      //刷新验证码
+      function refresh()
+      {
+         var code=document.getElementById("ckcode");
+         code.src='PictureCheckCode.Servlet?now='+Math.random();
+      }
+      
+      //页面初始加载
+      $(document).ready(function(){
+         if($.cookie("rmUser")=="true"){
+            $("#ck_rmUser").attr("checked","checked");
+            $("#tx_account").val($.cookie("account"));
+         }
+      });
+      
+      //使用cookie存储用户名
+      function save(){
+         var checked=$("#ck_rmUser").is(":checked");
+         if(checked){
+             var st_account=$("#tx_account").val();
+             $.cookie("rmUser","true",{expires:7});
+             $.cookie("account",st_account,{expires:7});
+          }else{
+             $.cookie("rmUser","false",{expire:-1});
+             $.cookie("account","",{expires:-1});
+          }
+      }
+</script>
+</body> 
+</html>
+
+
+
+

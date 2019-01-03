@@ -1,0 +1,14 @@
+.changepwd{
+	height: 400px;
+	width: 400px;
+	position: absolute;
+	left: 38%;
+	top: 15%;  
+}
+
+.submit{
+	color:white;
+	background-color:#1da02b;
+	width:250px;
+	height:40px;
+}

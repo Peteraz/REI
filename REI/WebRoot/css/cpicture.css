@@ -1,0 +1,14 @@
+.upload{
+	position: absolute;
+	height: 400px;
+	width: 400px;
+	left: 40%;
+	top: 20%;
+}
+
+.submit{
+	color:white;
+	background-color:#1da02b;
+	width:250px;
+	height:40px;
+}

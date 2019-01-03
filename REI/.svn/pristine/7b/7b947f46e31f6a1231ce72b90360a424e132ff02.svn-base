@@ -1,0 +1,26 @@
+.resetpasspwd{
+	position: absolute;
+	height: 400px;
+	width:400px;
+	left: 40%;
+	top:130px;
+}
+
+.submit{
+	color:white;
+	background-color:#1da02b;
+	width:250px;
+	height:40px;
+}
+
+.info{
+	position: absolute;
+	left: 48%;
+	top:70px;
+}
+
+.infos{
+	position: absolute;
+	left: 48%;
+	top:410px;
+}

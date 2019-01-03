@@ -1,0 +1,33 @@
+.changeinfo{
+	position: absolute;
+	height: 400px;
+	width: auto; 
+	left: 45%;
+	top: 10%;
+}
+
+.submit{
+	color:white;
+	background-color:#1da02b;
+	width:250px;
+	height:40px;
+}
+
+
+
+.resubmit{
+	position: absolute; 
+	left: 45%;
+	top: 65%;
+	color:white;
+	background-color:#1da02b;
+	width:250px;
+	height:40px;
+}
+
+.changeuserstatus{
+	position: absolute; 
+	left: 45%;
+	top: 96%;
+	color: rgba(0, 0, 255, 0.94);
+}

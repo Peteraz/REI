@@ -1,0 +1,172 @@
+<%@ page language="java" import="java.util.*" contentType="text/html;charaset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>修改密码</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta http-equiv="pragma" content="no-cache">                         <!--这几句meta作用是清除浏览器中的缓存,再次进入曾经访问过的页面时，浏览器必须从服务端下载最新的内容，达到刷新的效果。 -->
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">     <!--最后两句meta,做seo用 -->
+	<meta http-equiv="description" content="This is my page">
+	
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/changeinfo.css" rel="stylesheet">
+    <link href="./custom/uimaker/easyui.css" rel="stylesheet" >
+  </head>
+  
+  <body>
+        <form action="user-apply!changeinfos.action" class="changeinfo">
+             <h1 style="font-size: x-large!important;">修改用户信息</h1>
+             <br/>
+             <div>
+                 <label>姓名:</label>
+                 <input type="text" id="txt_name"  name="aentity.name"/>         
+             </div>
+             <br/>
+             <br/>
+             <br/>
+             <div>
+                 <label>性别:</label>
+                 <input type="text" id="txt_sex"  name="aentity.sex"/>           
+             </div>
+             <br/>
+             <br/>
+             <br/>
+             <div>
+                 <label>身份:</label>
+                 <input type="text" id="txt_email" name="aentity.email"/>      
+             </div>
+             <br/>
+             <br/>
+             <br/>
+             <div>
+                 <label>身份:</label>
+                 <input type="text" id="txt_identitys" name="aentity.identitys"/>      
+             </div>
+             <br/>
+             <br/>
+             <br/>
+             <div>
+                 <label>证件号:</label>
+                 <input type="text" id="txt_credential_number" name="aentity.credential_number"/>     
+             </div>
+             <br/>
+             <br/>
+             <br/>
+             <div>
+                 <label>身份证:</label>
+                 <input type="text" id="txt_idcard_number" name="aentity.idcard_number"/>
+             </div>
+             <br/>
+             <br/>
+             <br/>
+             <div>
+                 <label>部门:</label>
+                 <input type="text" id="txt_department" name="aentity.department"/>
+             </div>
+             <br/>
+             <br/>
+             <div>
+                 <input type="submit" class="submit" value="修改" onclick="changeinfo()" />
+             </div>
+       </form>
+       <c:if test="${user.identitys!='管理员'}">
+          <div>
+               <input type="submit" class="resubmit" value="重新审核"  onclick="repend()"/>
+          </div>
+       </c:if>
+    
+       <script type="text/javascript" src="./custom/jquery.min.js" charset="utf-8"></script>
+	   <script type="text/javascript" src="./custom/jquery.cookie.js" charset="utf-8"></script>
+	   <script type="text/javascript" src="./custom/jquery.easyui.min.js" charset="utf-8"></script>
+	   <script type="text/javascript" src="./custom/easyui-lang-zh_CN.js" charset="utf-8"></script>
+       <script type="text/javascript">
+             var identitys="${user.identitys}";
+             $(document).ready(function(){
+                //管理员直接放用户信息
+                if(identitys=="管理员")
+                {
+                    $("#txt_name").val("${user.name}");                                   //读取名字
+                	$("#txt_sex").val("${user.sex}");                                     //读取性别
+                	$("#txt_email").val("${user.email}");                                 //邮箱
+                	$("#txt_identitys").val("${user.identitys}");                         //读取身份
+                	$("#txt_credential_number").val("${user.credential_number}");         //读取证件
+                	$("#txt_idcard_number").val("${user.idcard_number}");                 //读取身份证
+                	$("#txt_department").val("${user.department}");                       //读取部门
+                }
+                else
+                {
+                    //非管理员放审核的用户信息
+                    $("#txt_name").val("${usera.name}");                                   //读取名字
+                	$("#txt_sex").val("${usera.sex}");                                     //读取性别
+                	$("#txt_email").val("${usera.email}");                                 //邮箱
+                	$("#txt_identitys").val("${usera.identitys}");                         //读取身份
+                	$("#txt_credential_number").val("${usera.credential_number}");         //读取证件
+                	$("#txt_idcard_number").val("${usera.idcard_number}");                 //读取身份证
+                	$("#txt_department").val("${usera.department}");                       //读取部门
+                }                       
+             });    
+             
+             //修改信息
+             var result = "${changeuserstatus}";
+      		 if(result!=null&&result!=""){
+      		 	$(function(){
+      				$.messager.show({
+      					title:"操作结果!",
+      					msg:result,
+      					showType:'fade',
+      					timeout:1500,
+      					//中间
+      					style:{ 
+      						right:'',
+      						bottom:''
+      					}
+      				});
+      		 	});   	
+             }
+                                 
+             //重新审核
+             function repend(){
+                $.ajax({
+                         //提交数据的方式 POST 或 GET
+                         type:'POST',
+                         //提交的地址
+                         url:'user-apply!repend.action',
+                         success:function(result){
+                            //将一个 JSON 字符串转换为对象。
+                            result = JSON.parse(result);   
+                            //操作结果提示
+      		 				var result = result;
+      		 				if(result!=null&&result!=""){
+      		 				$(function(){
+      							$.messager.show({
+      									title:"操作结果!",
+      									msg:result.changeuserstatus,
+      									showType:'fade',
+      									timeout:1500,
+      									//中间
+      									style:{ 
+      										right:'',
+      										bottom:''
+      									}
+      							});
+      		 				  });   	
+             				}
+                         }               
+                 }); 
+             }
+       </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+.topic{
+	position: absolute;
+	left:32%;
+	top: 50px;
+}
+
+.table{
+	position: absolute;
+	width:600px;
+	height:200px;
+	left:24%;
+	top: 250px;
+}
+
+.info{
+	position: absolute;
+	left:37%;
+	top: 200px;
+}
+
+.infos{
+	position: absolute;
+	left:29%;
+	top: 200px;
+}
