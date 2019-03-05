@@ -150,7 +150,7 @@ public class ReimbursementAction extends BaseAction{
             else if(week.equals("7")){
             	week="星期六";
             }
-	  		ActionContext ac = ActionContext.getContext();                                      //获取上下文对象
+	  		ActionContext ac = ActionContext.getContext();
 			//使用Map模拟HttpSession
 			Map<String,Object> sess = ac.getSession();
 			sess.put("notdo", notdo);
@@ -716,11 +716,11 @@ public class ReimbursementAction extends BaseAction{
 		
 		int n=0;
 		List<Reimbursement> rei=new ArrayList<Reimbursement>();   
-		n=dao.checkaps(user.getName());                                                           //已审核完的报销单的条数    
+		n=dao.checkaps(user.getName());                                                                         //已审核完的报销单的条数    
 		int pageNumber=Integer.valueOf(request.getParameter("pnumber"));                          //页号
 	    int pageSize=Integer.valueOf(request.getParameter("psize"));                              //页的大小
 	    int pn=(pageNumber-1)*pageSize; 
-		rei=dao.checkap(pn,pageSize,user.getName());                                              //第pageNumber页 ，pageSize条数据                 
+		rei=dao.checkap(pn,pageSize,user.getName());                                                             //第pageNumber页 ，pageSize条数据                 
 		Map<String, Object> sess=new HashMap<String, Object>();
 		sess.put("total",n);
 		sess.put("rows",rei);

@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="javascript:;">服务条款</a>
 				<a href="javascript:;">联系方式</a>
 			</div>
-			<div class="address">地址：暨南大学建阳院14栋225室&nbsp;邮编：5106329&nbsp;&nbsp;Copyright&nbsp;©&nbsp;2013&nbsp;-&nbsp;2017&nbsp;关步青&nbsp;版权所有</div>
+			<div class="address">地址：暨南大学建阳院14栋225室&nbsp;邮编：5106329&nbsp;&nbsp;Copyright&nbsp;©&nbsp;2015&nbsp;-&nbsp;2017&nbsp;关步青&nbsp;版权所有</div>
 			<div class="other-info">E-mail：673840304@qq.com</div>
 		</div>
 	</div>

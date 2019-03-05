@@ -67,7 +67,7 @@ public class ResetpwdAction extends BaseAction{
 	//重置密码页面
 	public String resetpwd() throws Exception{
 		String token=request.getParameter("token");
-		boolean status = false;                                                                           //状态1代表没问题，0代表有问题       
+		boolean status = false;
 		if(StringUtils.isNotBlank(token)){                                                                //token是不是空 
 			if(cdao.checktoken(token)!=null){                                                             //token存不存在，这是存在的话才执行下面的语句
 				Resetpwd cpwd=new Resetpwd();
