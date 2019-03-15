@@ -51,7 +51,7 @@ public class UserDAO  extends BaseDAO<User> {
 	//生成token
 	public static String createToken(){
 		String s = UUID.randomUUID().toString();
-		String token=s.substring(0,8)+s.substring(9,13)+s.substring(14,18)+s.substring(19,23)+s.substring(24);
+		String token=s.substring(0,8)+s.substring(9,13)+s.substring(14,18)+s.substring(19,23)+s.substring(24);   //去掉-,生成32位随机token
 		return token;
 	}  
 	
