@@ -61,7 +61,7 @@ public class FileUpload{
             }  
             String fileName=this.getFileFileName().get(i);  
             
-            String newfileName=getRandomFileName(fileName);
+            String newfileName=getRandomFileName(fileName);         //随机生成一个名字
             
             File uploadFile = new File(dir, newfileName);           //有两个参数，第一个是路径，第二个是文件名   
             
@@ -86,12 +86,12 @@ public class FileUpload{
     }   
     
     
-    //
+    //随机名字
     private  String getRandomFileName(String sfilename) {  
     	  
         SimpleDateFormat simpleDateFormat;  
   
-        simpleDateFormat = new SimpleDateFormat("yyyyMMdd");  
+        simpleDateFormat = new SimpleDateFormat("yyyyMMdd");   //日期模式
   
         Date date = new Date();  
   
@@ -99,9 +99,9 @@ public class FileUpload{
   
         Random random = new Random();  
   
-        int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数  
+        int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;    // 获取5位随机数  
   
-        String ext=sfilename.substring(sfilename.lastIndexOf("."),sfilename.length());
+        String ext=sfilename.substring(sfilename.lastIndexOf("."),sfilename.length()); //最后一个.出现的位置开始，到fike的名字的长度为止
 
         StringBuffer sb=new StringBuffer();
         

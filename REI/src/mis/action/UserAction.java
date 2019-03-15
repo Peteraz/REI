@@ -81,7 +81,9 @@ public class UserAction extends BaseAction {
 	public String hello() throws Exception{
 		return "hello";
 	}
-
+    public String Login()throws Exception{
+    	return "login";
+    } 
 	//注册
 	public String register() throws Exception {
 	        
